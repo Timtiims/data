@@ -4,7 +4,13 @@ using System;
 using HolmesglenStudentManagementSystem.PresentationLayer.StudentPL;
 using HolmesglenStudentManagementSystem.PresentationLayer.SubjectPL;
 using HolmesglenStudentManagementSystem.PresentationLayer.EnrollmentPL;
-
+using HolmesglenStudentManagementSystem.BusinessLogicLayer;
+using HolmesglenStudentManagementSystem.Models;
+using System.Runtime.Intrinsics.X86;
+using HolmesglenStudentManagementSystem.PresentationLayer.ReportPL;
+using HolmesglenStudentManagementSystem.PresentationLayer.EmailPL;
+using HolmesglenStudentManagementSystem.PresentationLayer.Import;
+using HolmesglenStudentManagementSystem.PresentationLayer.Export;
 
 namespace HolmesglenStudentManagementSystem
 {
@@ -35,6 +41,24 @@ namespace HolmesglenStudentManagementSystem
                     case "3":
                         ManageEnrollments();
                         break;
+                    case "4":
+                        UseConnectedMode();
+                        break;
+                    case "5":
+                        UseDisconnectedMode();
+                        break;
+                    case "6":
+                        GenerateReport();
+                        break;
+                    case "7":
+                        GeneratEmail();
+                        break;
+                    case "8":
+                        Import();
+                        break;
+                    case "9":
+                        Export();
+                        break;
                     case "0":
                         continueRunning = false;
                         Console.WriteLine("Exiting the program. Goodbye!");
@@ -54,18 +78,60 @@ namespace HolmesglenStudentManagementSystem
             Console.WriteLine("1. Manage Students");
             Console.WriteLine("2. Manage Subjects");
             Console.WriteLine("3. Manage Enrollments");
+            Console.WriteLine("4. Use Connected mode");
+            Console.WriteLine("5. Use Disconnected mode");
+            Console.WriteLine("6. Generate Report");
+            Console.WriteLine("7. Generate Email");
+            Console.WriteLine("8. Import");
+            Console.WriteLine("9. Export");
             Console.WriteLine("0. Exit");
             Console.Write("Enter your choice: ");
+        }
+
+        
+
+        static void UseConnectedMode()
+        {
+            new GetAllStudentsUsingConnectedMode().Run();
+        }
+
+        static void UseDisconnectedMode()
+        {
+            new GetAllStudentsUsingDisconnectedMode().Run();
+            new GetOneStudentUsingDisconnectedMode().Run();
+            new CreateStudentUsingDisconnectedMode().Run();
+            new UpdateStudentUsingDisconnectedMode().Run();
+            new DeleteStudentUsingDisconnectedMode().Run();
+        }
+
+        static void GenerateReport()
+        {
+            new GenerateReport().Run();
+        }
+
+        static void GeneratEmail()
+        {
+            new GenerateEmail().Run();
+        }
+
+        static void Import()
+        {
+            new ImportPL().Run();
+        }
+
+        static void Export()
+        {
+            new ExportPL().Run();
         }
 
         static void ManageStudents()
         {
             Console.WriteLine("=== Student Management ===");
-            (new GetAllStudents()).Run();
-            (new GetOneStudent()).Run();
-            (new CreateStudent()).Run();
-            (new UpdateStudent()).Run();
-            (new DeleteStudent()).Run();
+            new GetAllStudents().Run();
+            new GetOneStudent().Run();
+            new CreateStudent().Run();
+            new UpdateStudent().Run();
+            new DeleteStudent().Run();
         }
 
         static void ManageSubjects()

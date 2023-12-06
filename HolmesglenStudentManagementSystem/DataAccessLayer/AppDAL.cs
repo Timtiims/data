@@ -10,14 +10,13 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
 {
     public class AppDAL
     {
-
-
         public SqliteConnection Connection;
         public StudentDAL StudentDALInstance;
         public SubjectDAL SubjectDALInstance;
         public EnrollmentDAL EnrollmentDALInstance;
         public ExportDAL ExportDALInstance;
         public ImportDAL ImportDALInstance;
+        public DALDisconnected DALDisconnectedInstance;
 
         // private constructor
         public AppDAL() {
@@ -30,6 +29,7 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
             EnrollmentDALInstance = new EnrollmentDAL(Connection);
             ImportDALInstance = new ImportDAL(Connection);
             ExportDALInstance = new ExportDAL(Connection);
+            DALDisconnectedInstance = new DALDisconnected(HolmesglenDB.ConnectionString);
             // student todo:
             // implement the EnrollmentDAL class and create a instance here 
         }

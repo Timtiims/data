@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace HolmesglenStudentManagementSystem.DataAccessLayer
 {
@@ -16,17 +17,16 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
 
     {
         private SqliteConnection Connection;
-        string csvFilePath = @"C:\Users\Student\Desktop\Student.csv";
+        string csvFilePath = @"Student.csv";
 
 
         public ImportDAL(SqliteConnection connection)
         {
-            string connectionString = @"Data Source=C:\Users\Student\Desktop\HolmesglenInstitude.db";
-
-            connection.ConnectionString = connectionString;
             Connection = connection;
+        }
 
-
+        public void ImportData()
+        {
             // read data from csv and insert into the data base
             Connection.Open();
             using (var reader = new StreamReader(csvFilePath))
@@ -35,14 +35,14 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
                 var records = csv.GetRecords<Import>();
                 foreach (var record in records)
                 {
-                    var insertCommand = connection.CreateCommand();
+                    var insertCommand = Connection.CreateCommand();
                     insertCommand.CommandText = @"INSERT INTO Student (StudentID, FirstName, LastName, Email) 
                                                      VALUES ($studentid, $firstname, $lastname, $email)";
 
                     insertCommand.Parameters.AddWithValue("$studentid", record.StudentID);
                     insertCommand.Parameters.AddWithValue("$firstname", record.FirstName);
                     insertCommand.Parameters.AddWithValue("$lastname", record.LastName);
-                    insertCommand.Parameters.AddWithValue("email", record.Email);
+                    insertCommand.Parameters.AddWithValue("$email", record.Email);
 
                     insertCommand.ExecuteNonQuery();
                 }
@@ -50,10 +50,6 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
 
             Console.WriteLine("Data saved");
             Connection.Close();
-
-
-
-
         }
     }
 }

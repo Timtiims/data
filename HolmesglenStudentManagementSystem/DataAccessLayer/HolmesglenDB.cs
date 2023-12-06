@@ -5,6 +5,6 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
     {
         
         // correctly define the connection string for the target database
-        public static string ConnectionString = @"Data Source=C:\Users\banhb\Desktop\HolmesglenInstitude.db";
+        public static string ConnectionString = @"Data Source=HolmesglenInstitude.db";
     }
 }

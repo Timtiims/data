@@ -21,6 +21,7 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
                 using (var connection = appDAL.Connection)
                 {
                     ImportDAL importDAL = new ImportDAL(connection);
+                    importDAL.ImportData();
                 }
             }
             catch (Exception ex)

@@ -16,13 +16,10 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
     public class ExportDAL
     {
         private SqliteConnection Connection;
-        string csvFilePath2 = @"C:\Users\Student\Desktop\Student2.csv";
+        string csvFilePath2 = @"Student2.csv";
 
         public ExportDAL(SqliteConnection connection)
         {
-            string connectionString = @"Data Source=C:\Users\Student\Desktop\HolmesglenInstitude.db";
-            connection.ConnectionString = connectionString;
-
             Connection = connection;
             connection.Open();
 

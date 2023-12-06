@@ -68,6 +68,34 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
             return enrollment;
         }
 
+        public Enrollment ReadByStudentId(string id)
+        {
+            Enrollment enrollment = null;
+
+            Connection.Open();
+            var command = Connection.CreateCommand();
+            command.CommandText = @"
+                SELECT EnrollmentID, StudentID_FK, SubjectID_FK
+                FROM Enrollment
+                WHERE StudentID_FK = @a
+            ";
+            command.Parameters.AddWithValue("a", id);
+
+            // execute the query
+            var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                var enrollmentID = reader.GetString(0);
+                var studentID_FK = reader.GetString(1);
+                var subjectID_FK = reader.GetString(2);
+                enrollment = new Enrollment(enrollmentID, studentID_FK, subjectID_FK);
+            }
+
+            Connection.Close();
+
+            return enrollment;
+        }
+
         // Read All
         public List<Enrollment> ReadAll()
         {

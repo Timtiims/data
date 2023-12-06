@@ -8,31 +8,27 @@ using System.Threading.Tasks;
 
 namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
 {
-    public class EnrollmentBLL
+    public class StudentBLLDisconnected
     {
         AppDAL appDAL;
-        public EnrollmentBLL()
+        public StudentBLLDisconnected()
         {
             appDAL = new AppDAL();
         }
-        public List<Enrollment> GetAll()
+
+        public List<Student> ReadAll()
         {
-            return appDAL.EnrollmentDALInstance.ReadAll();
+            return appDAL.DALDisconnectedInstance.StudentReadAll();
         }
 
-        public Enrollment GetOne(string id)
+        public Student GetOne(string id)
         {
-            return appDAL.EnrollmentDALInstance.Read(id);
+            return appDAL.DALDisconnectedInstance.Read(id);
         }
 
-        public Enrollment GetOneByStudentId(string id)
+        public bool Create(Student student)
         {
-            return appDAL.EnrollmentDALInstance.ReadByStudentId(id);
-        }
-
-        public bool Create(Enrollment enrollment)
-        {
-            if (GetOne(enrollment.EnrollmentID) != null)
+            if (GetOne(student.Id) != null)
             {
                 // if student id exists, return false
                 return false;
@@ -40,15 +36,15 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
             else
             {
                 // if student id does not exist, create it
-                appDAL.EnrollmentDALInstance.Create(enrollment);
+                appDAL.StudentDALInstance.Create(student);
             }
 
             return true;
         }
 
-        public bool Update(Enrollment enrollment)
+        public bool Update(Student student)
         {
-            if (GetOne(enrollment.EnrollmentID) == null)
+            if (GetOne(student.Id) == null)
             {
                 // if student id does not exist, return false
                 return false;
@@ -56,7 +52,7 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
             else
             {
                 // if student id exists, update it
-                appDAL.EnrollmentDALInstance.Update(enrollment);
+                appDAL.StudentDALInstance.Update(student);
             }
 
             return true;
@@ -72,7 +68,7 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
             else
             {
                 // if student id exists, delete it
-                appDAL.EnrollmentDALInstance.Delete(id);
+                appDAL.StudentDALInstance.Delete(id);
             }
 
             return true;

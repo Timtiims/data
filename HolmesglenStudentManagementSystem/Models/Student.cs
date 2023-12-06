@@ -28,5 +28,11 @@ namespace HolmesglenStudentManagementSystem.Models
             LastName = lastName;
             Email = email;
         }
+
+        public Student(string id, string name)
+        {
+            Id = id;
+            FirstName = name;
+        }
     }
 }
