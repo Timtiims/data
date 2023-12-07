@@ -25,7 +25,7 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
             command1.CommandText = @"
                  INSERT INTO Subject
                  (SubjectID,Title) 
-                   VALUE(@a, @b)";
+                   VALUES(@a, @b)";
 
             command1.Parameters.AddWithValue("a", subject.SubjectId);
             command1.Parameters.AddWithValue("b", subject.Title);

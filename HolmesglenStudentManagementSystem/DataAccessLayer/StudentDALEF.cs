@@ -23,13 +23,13 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
             var students = db.Students.ToList();
             return students;
         }
-        // Method: Read one by Id
+        // Read one by Id
         public Student Read(string id)
         {
             Student student = db.Students.Find(id);
             return student;
         }
-        // Method: Create a student
+        // Create a student
         public bool Create(Student student)
         {
             if (db.Students.Find(student.Id) == null)

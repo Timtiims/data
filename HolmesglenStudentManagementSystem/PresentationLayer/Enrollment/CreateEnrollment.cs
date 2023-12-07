@@ -18,7 +18,7 @@ namespace HolmesglenStudentManagementSystem.PresentationLayer.EnrollmentPL
             enrollment.EnrollmentID = Console.ReadLine();
             Console.Write("Enter the Student ID: ");
             enrollment.StudentID_FK = Console.ReadLine();
-            Console.Write("Enter the Subject id Name: ");
+            Console.Write("Enter the Subject ID: ");
             enrollment.SubjectID_FK = Console.ReadLine();
 
 
