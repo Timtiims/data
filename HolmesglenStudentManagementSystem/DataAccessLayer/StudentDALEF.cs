@@ -13,9 +13,9 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
     {
         private AppDBContext db;
 
-        public StudentDALEF(AppDBContext appDBContext)
+        public StudentDALEF()
         {
-            this.db = appDBContext;
+            this.db = new AppDBContext();
         }
         // Method: ReadAll
         public List<Student> ReadAll()

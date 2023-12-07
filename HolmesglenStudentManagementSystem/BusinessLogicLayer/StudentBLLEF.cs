@@ -11,9 +11,9 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
     {
         private DataAccessLayer.StudentDALEF studentDAL;
 
-        public StudentBLLEF(AppDBContext appDBContext)
+        public StudentBLLEF()
         {
-            this.studentDAL = new DataAccessLayer.StudentDALEF(appDBContext);
+            this.studentDAL = new DataAccessLayer.StudentDALEF();
         }
 
         // Business Logic: Get all students

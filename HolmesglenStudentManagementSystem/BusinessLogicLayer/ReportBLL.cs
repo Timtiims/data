@@ -1,4 +1,5 @@
-﻿using HolmesglenStudentManagementSystem.Models;
+﻿using HolmesglenStudentManagementSystem.DataAccessLayer;
+using HolmesglenStudentManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,16 @@ namespace HolmesglenStudentManagementSystem.BusinessLogicLayer
 {
     public class ReportBLL
     {
-        private StudentBLL studentBLL;
-        private EnrollmentBLL enrollmentBLL;
+        private ReportDAL ReportDAL;
 
         public ReportBLL()
         {
-            studentBLL = new StudentBLL();
-            enrollmentBLL = new EnrollmentBLL();
+            ReportDAL = new ReportDAL();
         }
 
         public Report Create(string id)
         {
-            var student = studentBLL.GetOne(id);
-            var enrollment = enrollmentBLL.GetOneByStudentId(id);
-
-            return new Report(student, enrollment);
+            return ReportDAL.GetReport(id);
         }
     }
 }

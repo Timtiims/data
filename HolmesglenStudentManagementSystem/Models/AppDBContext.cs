@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace HolmesglenStudentManagementSystem.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=C:\Users\banhb\Desktop\EF_DB\HolmesglenInstituteEF.db");
+            optionsBuilder.UseSqlite($"Data Source=HolmesglenInstitudeEF.db");
         }
     }
 }

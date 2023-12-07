@@ -59,6 +59,9 @@ namespace HolmesglenStudentManagementSystem
                     case "9":
                         Export();
                         break;
+                    case "10":
+                        EntityFramework();
+                        break;
                     case "0":
                         continueRunning = false;
                         Console.WriteLine("Exiting the program. Goodbye!");
@@ -84,6 +87,7 @@ namespace HolmesglenStudentManagementSystem
             Console.WriteLine("7. Generate Email");
             Console.WriteLine("8. Import");
             Console.WriteLine("9. Export");
+            Console.WriteLine("10. Entity Framework");
             Console.WriteLine("0. Exit");
             Console.Write("Enter your choice: ");
         }
@@ -122,6 +126,15 @@ namespace HolmesglenStudentManagementSystem
         static void Export()
         {
             new ExportPL().Run();
+        }
+
+        static void EntityFramework()
+        {
+            new GetAllStudentsUsingEF().Run();
+            new GetOneStudentUsingEF().Run();
+            new CreateStudentUsingEF().Run();
+            new UpdateStudentUsingEF().Run();
+            new DeleteStudentUsingEF().Run();
         }
 
         static void ManageStudents()

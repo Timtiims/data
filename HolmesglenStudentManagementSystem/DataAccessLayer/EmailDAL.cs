@@ -9,23 +9,24 @@ using System.Threading.Tasks;
 
 namespace HolmesglenStudentManagementSystem.DataAccessLayer
 {
-    public class ReportDAL
+    public class EmailDAL
     {
         private SQLiteConnection Connection;
-        public ReportDAL()
+        public EmailDAL()
         {
             Connection = new SQLiteConnection(HolmesglenDB.ConnectionString);
         }
 
-        public Report GetReport(string id)
+        public EmailModel GetEmail(string id)
         {
-            Report report = new Report();
+            var email = new EmailModel();
             Connection.Open();
             // build the query command
             var command = Connection.CreateCommand();
             command.CommandText = @"
-                SELECT StudentID, FirstName, LastName, Email, cast(EnrollmentID as text), StudentID_FK, SubjectID_FK
+                SELECT StudentID, FirstName, LastName, Email, SubjectID, Title
                 FROM Student join Enrollment on Student.StudentID = Enrollment.StudentID_FK
+                join Subject on Enrollment.SubjectID_FK = Subject.SubjectID
                 WHERE StudentId = @studentId
             ";
             command.Parameters.AddWithValue("@studentId", id);
@@ -34,23 +35,22 @@ namespace HolmesglenStudentManagementSystem.DataAccessLayer
             if (reader.Read())
             {
                 var student = new Student();
-                var enrollment = new Enrollment();
+                var subject = new Subject();
                 student.Id = reader.GetString(0);
                 student.FirstName = reader.GetString(1);
                 student.LastName = reader.GetString(2);
                 student.Email = reader.GetString(3);
 
-                enrollment.EnrollmentID = reader.GetString(4);
-                enrollment.SubjectID_FK = reader.GetString(5);
-                enrollment.SubjectID_FK = reader.GetString(6);
+                subject.SubjectId = reader.GetString(4);
+                subject.Title = reader.GetString(5);
                 
-                report.Student = student;
-                report.Enrollment = enrollment;
+                email.Student = student;
+                email.Subject = subject;
             }
 
             Connection.Close();
 
-            return report;
+            return email;
         }
     }
 }

@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="DataAccessLayer\StudentDAL.cs~RF40fcfbdf.TMP" />
     <None Remove="HolmesglenInstitude.db" />
+    <None Remove="HolmesglenInstitudeEF.db" />
     <None Remove="Student.csv" />
   </ItemGroup>
 
@@ -23,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="HolmesglenInstitudeEF.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HolmesglenInstitude.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HolmesglenStudentManagementSystem.Models
 {
+    [Table("Student")]
     public class Student
     {
+        [Column("StudentID")]
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
